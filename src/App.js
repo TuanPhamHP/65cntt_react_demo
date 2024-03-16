@@ -151,7 +151,7 @@ function App() {
 	return (
 		<div className='App'>
 			<div className='container'>
-				<p className={buttonCss.myComponent}>Xin chào anh em nhé</p>
+				<p className={buttonCss.myComponent}>Render todo list</p>
 				<div className='row'>
 					<div className='col-12 mb-3  d-flex  gap-2'>
 						<div className='form-floating w-100'>
