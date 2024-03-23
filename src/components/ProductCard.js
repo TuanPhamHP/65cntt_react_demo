@@ -3,13 +3,13 @@ import React from 'react';
 export default function ProductCard({ product }) {
 	return (
 		<div className='col-3'>
-			<div class='card'>
-				<img src={product.image} class='card-img-top' alt='...' />
-				<div class='card-body'>
-					<h5 class='card-title'>{product.name}</h5>
-					<h5 class='card-text'>{product.price}</h5>
-					<p class='card-text'>{product.description}</p>
-					<a href='#' class='btn btn-primary'>
+			<div className='card'>
+				<img src={product.image} className='card-img-top' alt='...' />
+				<div className='card-body'>
+					<h5 className='card-title'>{product.name}</h5>
+					<h5 className='card-text'>{product.price}</h5>
+					<p className='card-text'>{product.description}</p>
+					<a href='#' className='btn btn-primary'>
 						Buy now
 					</a>
 				</div>

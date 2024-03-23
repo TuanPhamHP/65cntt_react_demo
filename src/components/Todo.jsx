@@ -6,10 +6,10 @@ export default function Todo({ todo }) {
 			<div className='d-flex justify-content-between w-100 align-items-center mb-2'>
 				<span>{todo.created_at}</span>
 				<div className='d-flex align-items-center gap-2'>
-					<button type='button' class='btn btn-outline-success'>
+					<button type='button' className='btn btn-outline-success'>
 						Hoàn thành
 					</button>
-					<button type='button' class='btn btn-outline-danger'>
+					<button type='button' className='btn btn-outline-danger'>
 						Xóa
 					</button>
 				</div>
@@ -25,7 +25,7 @@ export const FinishedTodo = ({ todo }) => {
 			<div className='d-flex justify-content-between w-100 align-items-center mb-2'>
 				<span>{todo.created_at}</span>
 				<div className='d-flex align-items-center gap-2'>
-					<button type='button' class='btn btn-outline-danger'>
+					<button type='button' className='btn btn-outline-danger'>
 						Xóa
 					</button>
 				</div>
@@ -41,7 +41,7 @@ export const CanceledTodo = ({ todo }) => {
 			<div className='d-flex justify-content-between w-100 align-items-center mb-2'>
 				<span>{todo.created_at}</span>
 				<div className='d-flex align-items-center gap-2'>
-					<button type='button' class='btn btn-primary'>
+					<button type='button' className='btn btn-primary'>
 						Mới
 					</button>
 				</div>

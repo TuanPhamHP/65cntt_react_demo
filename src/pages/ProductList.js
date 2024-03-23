@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { tStr } from 'validation_t/src';
 import ProductCard from '../components/ProductCard';
 
 export default function ProductList() {
+	const [search, setSearch] = useState('');
 	const [sortBy, setSortBy] = useState('');
 	const [listData, setListData] = useState([
 		{
@@ -54,23 +56,44 @@ export default function ProductList() {
 		},
 	]);
 
+	useEffect(() => {
+		// Gọi mỗi khi component được render hoặc count thay đổi
+		// Khi otherCount thay đổi sẽ không khiến effect được chạy lại
+		console.log('Effect ran!');
+
+		// Cleanup function (nếu cần)
+		return () => {
+			console.log('Cleanup!');
+		};
+	}, []);
+
 	const renderListData = () => {
-		const computedArray = [...listData].sort((a, b) => {
-			switch (sortBy) {
-				case '1':
-					return a.price - b.price;
+		const computedArray = [...listData]
+			.sort((a, b) => {
+				switch (sortBy) {
+					case '1':
+						return a.price - b.price;
 
-				case '2':
-					return b.price - a.price;
+					case '2':
+						return b.price - a.price;
 
-				default:
-					return 0;
-			}
-		});
-
-		return computedArray.map(item => {
-			return <ProductCard key={item.id} product={item} />;
-		});
+					default:
+						return 0;
+				}
+			})
+			.filter(product => {
+				const productName = tStr.removeAscent(product.name);
+				const searchContent = tStr.removeAscent(search);
+				return productName.includes(searchContent);
+			});
+		// a ? b : c
+		return computedArray.length ? (
+			computedArray.map(item => {
+				return <ProductCard key={item.id} product={item} />;
+			})
+		) : (
+			<h1 className='text-center'>Không có sản phẩm nào</h1>
+		);
 	};
 
 	const handleChangeSortPrice = event => {
@@ -78,14 +101,23 @@ export default function ProductList() {
 		setSortBy(value);
 	};
 
+	const handleChangeSearch = event => {
+		const target = event.target;
+		if (!target) {
+			return;
+		}
+		setSearch(target.value);
+	};
+
 	return (
 		<div>
 			<h1>Danh sách sản phẩm</h1>
+			<div className='input-group mb-3'>
+				<input type='text' className='form-control' placeholder='Tìm theo tên sản phẩm' onChange={handleChangeSearch} />
+			</div>
 			<div className='mb-3 '>
-				<select onChange={handleChangeSortPrice} class='form-select' aria-label='Default select example'>
-					<option selected disabled>
-						Sắp xếp theo
-					</option>
+				<select onChange={handleChangeSortPrice} className='form-select' aria-label='Default select example'>
+					<option disabled>Sắp xếp theo</option>
 					<option value='1'>Giá tăng dần</option>
 					<option value='2'>Giá giảm dần</option>
 					<option value='3'>Mặc định</option>
